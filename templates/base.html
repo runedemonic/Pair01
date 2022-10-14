@@ -2,20 +2,39 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-  </head>
+</head>
 
-  <body>
-    <div class="container">
-      <a href = "{% url 'accounts:signup'} %">회원가입</a>
-    </div>
-    {% block content %}{% endblock content %}
-  </body>
+<body>
+<nav>
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'accounts:detail' user.pk %}" tabindex="-1" aria-disabled="true">{{ request.user }}님 안녕하세요!</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1" aria-disabled="true">로그아웃</a>
+        </li>
+
+    {% else %}
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}" tabindex="-1" aria-disabled="true">로그인</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:signup' %}" tabindex="-1" aria-disabled="true">회원가입</a>
+        </li>
+        </nav>
+    {% endif %}
+<div class="container">
+
+</div>
+{% block content %}{% endblock content %}
+</body>
 
 </html>
