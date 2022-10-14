@@ -7,11 +7,13 @@
     <div class="container mt-5 border border-3 border-dark rounded">
         <h1 class="p-3">{{ data.title }}</h1>
         <div class="container">
-            <p>영화제목:{{ data.movie_name }}</p>
+
+            <img src="{{ data.img }}" style="height: 400px;">
+            <p>{{ data.movie_name }}</p>
             <p>평점 :
                 {{ data.grade }}
             </p>
-              <p>
+            <p>
                 {{ data.content }}
             </p>
             <p>
@@ -19,7 +21,7 @@
                 {{ user.date_joined }}
             </p>
             <a href="{% url 'reviews:update' data.pk %}" class='btn btn-dark text-white mb-3'>수정</a>
-            <a href="{% url 'reviews:delete' data.pk %}" class='btn btn-dark text-white mb-3'>삭제</a
+            <a href="{% url 'reviews:delete' data.pk %}" class='btn btn-dark text-white mb-3'>삭제</a>
         </div>
     </div>
 {% endblock %}
