@@ -18,7 +18,7 @@ class ReviewForm(forms.ModelForm):
                 }
             ),
             "content": forms.Textarea(attrs={"class": "from-control", "rows": 10}),
-            "grade": forms.TextInput(
+            "grade": forms.Select(
                 attrs={
                     "class": "from-control",
                 }
