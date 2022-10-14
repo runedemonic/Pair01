@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  <h1>회원 목록</h1>
-  <form action="">
-    {% for i in users%}
-      <a href="{% url 'accounts:detail' i.pk %}">{{ i.username }}</a>
-    {% endfor %}
-  </form>
+    <div class="container mt-3">
+        <h1>회원 목록</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">
+                    {% for i in users %}
+                        <a href="{% url 'accounts:detail' i.pk %}">{{ i.username }}</a>
+                    {% endfor %}
+                </th>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 {% endblock %}

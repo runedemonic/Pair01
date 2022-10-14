@@ -1,10 +1,32 @@
-
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 
 {% block content %}
- {% for review in reviews %}
-  <h1>{{review.id}}</h1>
-  <h2><a href="{% url 'reviews:detail' %}">{{review.title}}</a></h2>
-  {% endfor %}
-  {% endblock%}
+
+
+    <div class="container mt-3">
+        <h1>리뷰 게시판</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for review in reviews %}
+                <tr>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                    <td>
+
+                        <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

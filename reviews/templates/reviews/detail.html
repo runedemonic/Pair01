@@ -2,26 +2,24 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-    {% for i in data %}
-        <div>
-            <h1>{{ i.title }}</h1>
-            {{ i.created_at }}
-            <p>
-                {{ i.movie_name }}
+
+
+    <div class="container mt-5 border border-3 border-dark rounded">
+        <h1 class="p-3">{{ data.title }}</h1>
+        <div class="container">
+            <p>영화제목:{{ data.movie_name }}</p>
+            <p>평점 :
+                {{ data.grade }}
+            </p>
+              <p>
+                {{ data.content }}
             </p>
             <p>
-                {{ i.grade }}
+                작성일 :
+                {{ user.date_joined }}
             </p>
+            <a href="{% url 'reviews:update' data.pk %}" class='btn btn-dark text-white mb-3'>수정</a>
+            <a href="{% url 'reviews:delete' data.pk %}" class='btn btn-dark text-white mb-3'>삭제</a
         </div>
-        <div>
-            <p>
-                {{ i.content }}
-            </p>
-        </div>
-    {% endfor %}
-    <a class="btn btn-primary" href="{% url 'reviews:update' i.pk %}">수정</a>
-    <form class='m-0' action="{% url 'reviews:delete' i.pk %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger ms-2">삭제</button>
-    </form>
+    </div>
 {% endblock %}

@@ -1,24 +1,21 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block content %}
-  <h1>회원 정보</h1>
-  <a href="{% url 'accounts:update' %}" class='btn btn-dark text-white mb-3'>회원정보 수정</a>
-  <table class="table">
-    <tr>
-      <th>
-        아이디
-      </th>
-      <td>
-        {{ user.id }}
-      </td>
-    </tr>
-    <tr>
-      <th>
-        이름
-      </th>
-      <td>
-        {{ user.username }}
-      </td>
-    </tr>
-  </table>
+
+    <div class="container mt-5 border border-3 border-dark rounded">
+        <h1 class="p-3">{{ user.username }}님의 프로필</h1>
+        <div class="container">
+            <p>{{ user.id }}번</p>
+            <p>이메일 :
+                {{ user.email }}</p>
+            <p>
+                가입일 :
+                {{ user.date_joined }}
+            </p>
+            <a href="{% url "accounts:index" %}" class='btn btn-dark text-white mb-3'>홈으로</a>
+            <a href="{% url 'accounts:update' %}" class='btn btn-dark text-white mb-3'>회원정보 수정</a>
+        </div>
+    </div>
+
+
 {% endblock %}
