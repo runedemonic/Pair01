@@ -25,9 +25,27 @@ def index(request):
     }
     return render(request, "reviews/index.html", context)
 
-def update(request,_pk):
+
+def detail(request, _pk):
     data = Review.objects.get(pk=_pk)
     context = {
         "data": data,
     }
     return render(request, "reviews/detail.html", context)
+
+
+def update(request, _pk):
+    review = Review.objects.get(pk=_pk)
+
+    if request.method == "POST":
+        review_form = ReviewForm(request.POST, instance=review)
+        if review_form.is_valid():
+            review_form.save()
+            return redirect("reviews:index")
+    else:
+        review_form = ReviewForm(instance=review)
+    context = {
+        "review_form": review_form,
+    }
+
+    return render(request, "reviews/form.html", context)
