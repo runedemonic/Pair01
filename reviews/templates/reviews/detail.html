@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+    {% for i in data %}
+        <div>
+            <h1>{{ i.title }}</h1>
+            {{ i.created_at }}
+            <p>
+                {{ i.movie_name }}
+            </p>
+            <p>
+                {{ i.grade }}
+            </p>
+        </div>
+        <div>
+            <p>
+                {{ i.content }}
+            </p>
+        </div>
+    {% endfor %}
+    <a class="btn btn-primary" href="{% url 'reviews:update' i.pk %}">수정</a>
+    <form class='m-0' action="{% url 'reviews:delete' i.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger ms-2">삭제</button>
+    </form>
+{% endblock %}
