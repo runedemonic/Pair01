@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -15,7 +16,7 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
-    return render(request, "accounts:signup.html", context)
+    return render(request, "accounts/signup.html", context)
 
 
 def login(request):
@@ -30,3 +31,20 @@ def login(request):
         "form" : form,
     }
     return render(request, "accounts/login.html", context)
+
+def index(request):
+    users = get_user_model().objects.all()
+    context ={
+        "users":users
+    }
+
+    return render(request,'accounts/index.html',context)
+
+
+def detail(request,pk):
+    user = get_user_model().objects.get(pk=pk)
+    context ={
+        'user':user
+    }
+
+    return render(request,'accounts/detail.html',context)

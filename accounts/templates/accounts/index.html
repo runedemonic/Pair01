@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+    <h1>회원 목록</h1>
+    <form action="detail.html">
+    {% for i in users%}
+        <a href="">{{ i.username }}</a>
+    {% endfor %}
+    </form>
+{% endblock %}
