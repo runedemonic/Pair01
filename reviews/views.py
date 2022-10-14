@@ -81,6 +81,14 @@ def update(request, _pk):
     if request.method == "POST":
         review_form = ReviewForm(request.POST, instance=review)
         if review_form.is_valid():
+            # 리뷰 폼이 바로 저장 되지 않도록 commit = False 하고 post에 저장
+            post = review_form.save(commit=False)
+            # post에 저장된 movie_url을 가져와서 크롤링하여 data에 저장
+            data = get_movie_data(post.movie_url)
+            # post에 있는 movie_name과 img를 크롤링한 결과값으로 교체
+            post.movie_name = data['title']
+            post.img = data['img']
+            # 리뷰폼 저장
             review_form.save()
             return redirect("reviews:index")
     else:
