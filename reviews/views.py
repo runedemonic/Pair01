@@ -24,3 +24,10 @@ def index(request):
         "reviews": reviews,
     }
     return render(request, "reviews/index.html", context)
+
+def update(request,_pk):
+    data = Review.objects.get(pk=_pk)
+    context = {
+        "data": data,
+    }
+    return render(request, "reviews/detail.html", context)
