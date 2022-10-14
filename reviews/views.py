@@ -16,3 +16,11 @@ def create(request):
     }
 
     return render(request, "reviews/create.html", context)
+
+
+def index(request):
+    reviews = Review.objects.all()
+    context = {
+        "reviews": reviews,
+    }
+    return render(request, "reviews/index.html", context)
