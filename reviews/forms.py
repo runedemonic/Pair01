@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import HiddenInput
+
 from .models import Review
 
 
@@ -12,7 +14,7 @@ class ReviewForm(forms.ModelForm):
                     "class": "form-control",
                 }
             ),
-            "movie_name": forms.TextInput(
+            "movie_url": forms.TextInput(
                 attrs={
                     "class": "form-control",
                 }
@@ -23,10 +25,12 @@ class ReviewForm(forms.ModelForm):
                     "class": "from-control",
                 }
             ),
+            "movie_name": HiddenInput(),
+            "img":HiddenInput(),
         }
         labels = {
             "title": "글 제목",
-            "movie_name": "영화 제목",
+            "movie_url": "영화 링크",
             "content": "줄거리",
             "grade": "평점",
         }
