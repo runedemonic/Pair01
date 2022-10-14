@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from reviews.forms import ReviewForm
 from reviews.models import Review
+from django.db.models import Q
 
 # Create your views here.
 def create(request):
@@ -50,7 +51,27 @@ def update(request, _pk):
 
     return render(request, "reviews/update.html", context)
 
-def delete(request,_pk):
+
+def delete(request, _pk):
     Review.objects.get(pk=_pk).delete()
 
     return redirect("reviews:index")
+
+
+def search(request):
+    all_data = Review.objects.order_by("-pk")
+    search = request.GET.get("search", "")
+    if search:
+        search_list = all_data.filter(
+            Q(title__icontains=search) | Q(movie_name__icontains=search)
+        )
+
+        context = {
+            "search_list": search_list,
+        }
+    else:
+        context = {
+            "search_list": all_data,
+        }
+
+    return render(request, "reviews/search.html", context)

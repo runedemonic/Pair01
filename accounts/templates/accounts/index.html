@@ -1,24 +1,28 @@
-{% extends 'base.html' %}
-{% load django_bootstrap5 %}
+{% extends 'base.html' %}{% load django_bootstrap5 %}
 {% block content %}
-    <div class="container mt-3">
-        <h1>회원 목록</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Username</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">
-                    {% for i in users %}
-                        <a href="{% url 'accounts:detail' i.pk %}">{{ i.username }}</a>
-                    {% endfor %}
-                </th>
-            </tr>
-            </tbody>
-        </table>
+  <h1 class="text-center p-4">HOME</h1>
 
-    </div>
+  <div class='container'>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th scope='col'>No.</th>
+          <th scope='col'>name</th>
+          <th scope='col'>email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <th scope='row'>{{ forloop.counter }}</th>
+            <td>
+              <a href='{% url 'accounts:detail' user.pk %}'>{{ user.username }}</a>
+            </td>
+            <td>{{ user.email }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
 {% endblock %}
