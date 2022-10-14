@@ -9,4 +9,5 @@ urlpatterns = [
     path("index/", views.index, name="index"),
     path("<int:pk>/detail", views.detail, name="detail"),
     path("update/", views.update, name="update"),
+    path("logout/", views.logout, name="logout"),
 ]
